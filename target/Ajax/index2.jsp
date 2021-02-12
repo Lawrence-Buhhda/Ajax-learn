@@ -6,20 +6,22 @@
 </head>
 <body>
 <script type="text/javascript">
-   $(function () {
-       $("#btn").click(function () {
-           $.post("${pageContext.request.contextPath}/Jquery1/back2",function (data) {
-               console.log(data);
-               var html =""
-               for(var i=0;i<data.length;i++){
-                   html += "<tr>" + "<td>"
-                   data[i].name
-                   data[i].age
-                   data[i].sex
-               }
-           })
-       })
-   })
+    $(function () {
+        $("#btn").click(function () {
+            $.post("${pageContext.request.contextPath}/Jquery1/back2", function (data) {
+                console.log(data);
+                var html = ""
+                for (var i = 0; i < data.length; i++) {
+                    html += "<tr>" +
+                        "<td>" + data[i].name + "</td>" +
+                        "<td>" + data[i].age + "</td>" +
+                        "<td>" + data[i].sex + "</td>" +
+                        "</tr>"
+                }
+                $("#content").html(html);
+            })
+        })
+    })
 </script>
 用户名：
 <input type="button" id="btn" value="获取数据">

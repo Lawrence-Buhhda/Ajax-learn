@@ -41,4 +41,25 @@ public class AjaxController {
 
         return list;//由于加了@ResponseBody注解，他会返回一个字符串
     }
+//登录注册案例
+    @RequestMapping("/back3")
+    @ResponseBody
+    public String ajax3(String name,String pwd) throws IOException {
+        String msg = "";
+        if (name != null) {
+            if ("admin".equals(name)) {
+                msg = "ok";
+            } else {
+                msg = "用户名有误";
+            }
+        }
+        if (pwd != null) {
+            if ("123456".equals(pwd)) {
+                msg = "ok";
+            } else {
+                msg = "密码有误";
+            }
+        }
+        return msg;
+    }
 }
