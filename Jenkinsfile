@@ -105,7 +105,7 @@ pipeline {
 
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: '**/target/*.jar', onlyIfSuccessful: true
+                archiveArtifacts artifacts: '**/target/*.war', onlyIfSuccessful: true
             }
         }
     }
