@@ -122,5 +122,12 @@
 
   <build>
     <finalName>Ajax</finalName>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.3.2</version> <!-- 确保使用最新版本 -->
+        </plugin>
+    </plugins>
   </build>
 </project>
