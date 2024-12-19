@@ -128,13 +128,7 @@ def setBuildStatus(String statusMessage, String status) {
     step([
         $class: 'GitHubCommitStatusSetter',
         reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/Lawrence-Buhhda/Ajax-learn'],
-        contextSource: [$class: 'ManuallyEnteredCommitContextSource', context: "ci/jenkins/${status}"],
-        statusResultSource: [
-            $class: 'ConditionalStatusResultSource',
-            results: [
-                [$class: 'SuccessBuildResult', state: 'SUCCESS', message: statusMessage],
-                [$class: 'FailureBuildResult', state: 'FAILURE', message: statusMessage]
-            ]
-        ]
+        contextSource: [$class: 'ManuallyEnteredCommitContextSource', context: "ci/jenkins/build-status],
+        statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: statusMessage, state: status]] ]
     ])
 }
