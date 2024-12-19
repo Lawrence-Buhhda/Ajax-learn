@@ -119,23 +119,22 @@ pipeline {
             setBuildStatus("Build succeeded", "SUCCESS");
         }
         always {
-            def setBuildStatus(String statusMessage, String status) {
-                step([
-                    $class: 'GitHubCommitStatusSetter',
-                    reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/Lawrence-Buhhda/Ajax-learn'],
-                    contextSource: [$class: 'ManuallyEnteredCommitContextSource', context: "ci/jenkins/${status}"],
-                    statusResultSource: [
-                        $class: 'ConditionalStatusResultSource',
-                        results: [
-                            [$class: 'SuccessBuildResult', state: 'SUCCESS', message: statusMessage],
-                            [$class: 'FailureBuildResult', state: 'FAILURE', message: statusMessage]
-                        ]
-                    ]
-                ])
-            }
-
-            // 无论构建成功与否，都发送状态到 GitHub
             setBuildStatus("Build in progress", "PENDING")
         }
     }
+}
+// 在这里定义 setBuildStatus 方法
+def setBuildStatus(String statusMessage, String status) {
+    step([
+        $class: 'GitHubCommitStatusSetter',
+        reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/Lawrence-Buhhda/Ajax-learn'],
+        contextSource: [$class: 'ManuallyEnteredCommitContextSource', context: "ci/jenkins/${status}"],
+        statusResultSource: [
+            $class: 'ConditionalStatusResultSource',
+            results: [
+                [$class: 'SuccessBuildResult', state: 'SUCCESS', message: statusMessage],
+                [$class: 'FailureBuildResult', state: 'FAILURE', message: statusMessage]
+            ]
+        ]
+    ])
 }
