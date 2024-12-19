@@ -14,7 +14,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/Jquery1")
 public class AjaxController {
-    //第一种方式，服务器要返回一个字符串，直接使用response Tes
+    //第一种方式，服务器要返回一个字符串，直接使用response Test
     @RequestMapping("/back")
 //    @ResponseBody
     public void ajax(String name, HttpServletResponse response) throws IOException {
