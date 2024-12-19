@@ -58,7 +58,7 @@ pipeline {
                 not { changeRequest() }
             }
             steps {
-                git branch: 'main', changelog: false, credentialsId: '705f6177-34ad-4a85-9aaf-e61f089a56a2', poll: false, url: 'https://github.com/Lawrence-Buhhda/Ajax-learn.git'            
+                git branch: 'master', changelog: false, credentialsId: '705f6177-34ad-4a85-9aaf-e61f089a56a2', poll: false, url: 'https://github.com/Lawrence-Buhhda/Ajax-learn.git'            
             }
         }
         
@@ -129,12 +129,6 @@ def setBuildStatus(String statusMessage, String status) {
         $class: 'GitHubCommitStatusSetter',
         reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/Lawrence-Buhhda/Ajax-learn'],
         contextSource: [$class: 'ManuallyEnteredCommitContextSource', context: "ci/jenkins/${status}"],
-        statusResultSource: [
-            $class: 'ConditionalStatusResultSource',
-            results: [
-                [$class: 'SuccessBuildResult', state: 'SUCCESS', message: statusMessage],
-                [$class: 'FailureBuildResult', state: 'FAILURE', message: statusMessage]
-            ]
-        ]
+        statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
     ])
 }
